@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>demo</title>
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js" ></script>
+</head>
+<body>
+<input type="button" value="发送id" onclick="sendId()" />
+<input type="button" value="查询所有人信息" onclick="findAll()" />
+<input type="button" value="查询id=1的人信息" onclick="findOne()" />
+<input type="button" value="查询id=2的人信息" onclick="findTwo()" />
+</br>
+<img src = 'img/111.jpg' width="700" height="350">
+</br>
+
+<input type="button" value="借物质" onclick="TBBorrowOne()" />
+<input type="button" value="还物质" onclick="TBAvailableOne()" />
+<input type="button" value="查询所有物资" onclick="TBfindAll()"/>
+
+<input type="button" value="查询一个" onclick="TBfindOne()" />
+<br>
+<br>
+
+01：<input type="text" value="" id="IID"/><br>
+02：<input type="text" value="" id="Iname"/><br>
+03：<input type="text" value="" id="CID"/><br>
+04：<input type="text" value="" id="Inote"/><br>
+05：<input type="text" value="" id="Istate"/><br>
+
+<input type="button" value="增加物资" onclick="TBMinsertOne()"/>
+<br>
+<br>
+<input type="button" value="删除物资" onclick="TBMdeleteOne()"/>
+
+
+
+<script>
+    var getdata=0;
+    function sendId(){
+        $.ajax({
+            async:false,
+            type:"get",
+            url:"http://localhost:8080/api/finduser?id=2018",
+            contentType: "application/x-www-form-urlencoded",
+            dataType: "json",
+            data: {
+            },
+
+            success:function(result){
+                alert(result.name)
+            },
+            error: function (errorMsg) {
+                //请求失败时执行该函数
+                alert("请求数据失败!");
+            }
+        });
+    }
+    function findAll(){
+        $.ajax({
+            async:false,
+            type:"get",
+            url:"http://localhost:8080/software/findAll",
+            contentType: "application/x-www-form-urlencoded",
+            dataType: "json",
+            data: {},
+            success:function(result){
+                console.log(result);
+            },
+            error: function (errorMsg) {
+                //请求失败时执行该函数
+                alert("请求数据失败!");
+            }
+        });
+        //$("#findAll").text(getdata)
+    }
+
+
+    function findOne(){
+        $.ajax({
+            async:false,
+            type:"get",
+            url:"http://localhost:8080/software/findOne?id=1",
+            contentType: "application/x-www-form-urlencoded",
+            dataType: "json",
+            data: {},
+            success:function(result){
+                console.log(result);
+            },
+            error: function (errorMsg) {
+                //请求失败时执行该函数
+                alert("请求数据失败!");
+            }
+        });
+    }
+
+    function findTwo(){
+        $.ajax({
+            async:false,
+            type:"get",
+            url:"http://localhost:8080/software/findOne",
+            contentType: "application/x-www-form-urlencoded",
+            dataType: "json",
+            data: {id:2},
+            success:function(result){
+                console.log(result);
+            },
+            error: function (errorMsg) {
+                //请求失败时执行该函数
+                alert("请求数据失败!");
+            }
+        });
+        }
+
+    function insertOne() {
+
+        var json_data={
+            "uid" : $("#uid").val(),
+            "name" : $("#name").val(),
+            "sex":$("#sex").val(),
+            "age":$("#age").val(),
+            "birthday":$("#birthday").val(),
+            "grade" : $("#grade").val(),
+            "major" : $("#major").val()
+        };
+
+
+        $.ajax({
+            async:false,
+            type:"post",
+            url:"http://localhost:8080/software/insertOne",
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            data : JSON.stringify(json_data),
+            success: function (data){
+                alert("插入成功了");
+                console.log(data.result);
+            },
+            error:function (errorMsg) {
+
+                alert("失败");
+            }
+        });
+    }
+
+
+    function TBfindOne(){
+        $.ajax({
+            async:false,
+            type:"get",
+            url:"http://localhost:8080/Tb_mcheckout/findOne?iid=2&uid=2",
+            contentType: "application/x-www-form-urlencoded",
+            dataType: "json",
+            data: {},
+            success:function(result){
+                console.log(result);
+            },
+            error: function (errorMsg) {
+                //请求失败时执行该函数
+                alert("请求数据失败!");
+            }
+        });
+    }
+    function TBfindAll(){
+        $.ajax({
+            async:false,
+            type:"get",
+            url:"http://localhost:8080/Tb_mcheckout/TBfindAll?",
+            contentType: "application/x-www-form-urlencoded",
+            dataType: "json",
+            data: {},
+            success:function(result){
+                console.log(result);
+            },
+            error: function (errorMsg) {
+                //请求失败时执行该函数
+                alert("请求数据失败!");
+            }
+        });
+    }
+    function TBAvailableOne(){
+        $.ajax({
+            async:false,
+            type:"get",
+            url:"http://localhost:8080/Tb_mcheckout/TBAvailable?iid=2&uid=2",
+            contentType: "application/x-www-form-urlencoded",
+            dataType: "json",
+            data: {},
+            success:function(result){
+                console.log(result);
+            },
+            error: function (errorMsg) {
+                //请求失败时执行该函数
+                alert("请求数据失败!");
+            }
+        });
+    }
+    function TBMinsertOne() {
+
+        var json_data={
+            "Iid" : $("#IID").val(),
+            "Iname" : $("#Iname").val(),
+            "Cid":$("#CID").val(),
+            "Inote":$("#Inote").val(),
+            "Istate":$("#Istate").val(),
+        };
+
+
+        $.ajax({
+            async:false,
+            type:"post",
+            url:"http://localhost:8080/Mmaterials/TBMinsertOne",
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            data : JSON.stringify(json_data),
+            success: function (data){
+                alert("插入成功了");
+                console.log(data.result);
+            },
+            error:function (errorMsg) {
+
+                alert("失败");
+            }
+        });
+    }
+    function TBMdeleteOne(){
+        $.ajax({
+            async:false,
+            type:"get",
+            url:"http://localhost:8080/Mmaterials/TBMdeleteOne?iid=12&uid=2",
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            data:{
+            },
+            success: function (result){
+                alert("删除成功了");
+                console.log(result.name);
+
+            },
+            error:function (errorMsg) {
+
+                alert(udmajor);
+            }
+        });
+    }
+
+    function TBBorrowOne(){
+        $.ajax({
+            async:false,
+            type:"get",
+            url:"http://localhost:8080/Tb_mcheckout/borrow?iid=2&uid=2",
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            data:{
+            },
+            success: function (result){
+                console.log(result);
+            },
+            error:function (errorMsg) {
+                alert("失败");
+            }
+        });
+    }
+
+</script>
+</body>
+</html>
