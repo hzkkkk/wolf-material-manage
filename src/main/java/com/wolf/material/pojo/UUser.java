@@ -28,6 +28,7 @@ public class UUser {
         this.setUapartment(object.getString("apartment"));
         this.setUpermission(object.getString("permission"));
         this.setUphone(object.getString("phone"));
+
     }
 
 }

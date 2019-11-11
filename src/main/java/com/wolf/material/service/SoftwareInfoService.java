@@ -7,8 +7,6 @@
 package com.wolf.material.service;
 import com.wolf.material.pojo.SoftwareInfo;
 
-import javax.xml.crypto.Data;
-import java.sql.Date;
 import java.util.List;
 
 public interface SoftwareInfoService {

@@ -11,17 +11,13 @@
 <input type="button" value="查询id=1的人信息" onclick="findOne()" />
 <input type="button" value="查询id=2的人信息" onclick="findTwo()" />
 </br>
-<img src = 'img/111.jpg' width="700" height="350">
-</br>
+<input type="button" value="发送id" onclick="TBfindOne()" />
 
-<input type="button" value="借物质" onclick="TBBorrowOne()" />
 <input type="button" value="还物质" onclick="TBAvailableOne()" />
+
 <input type="button" value="查询所有物资" onclick="TBfindAll()"/>
-
-<input type="button" value="查询一个" onclick="TBfindOne()" />
 <br>
 <br>
-
 01：<input type="text" value="" id="IID"/><br>
 02：<input type="text" value="" id="Iname"/><br>
 03：<input type="text" value="" id="CID"/><br>
@@ -31,10 +27,12 @@
 <input type="button" value="增加物资" onclick="TBMinsertOne()"/>
 <br>
 <br>
+删除操作
+要删除的物资id：<input type="text" value="" id="delete_iid"/><br>
+输入用户id（查看是否为管理员）：<input type="text" value="" id="delete_uid"/><br>
 <input type="button" value="删除物资" onclick="TBMdeleteOne()"/>
 
-
-
+<input type="button" value="发送物资种类id" onclick="select_findCategory()"/>
 <script>
     var getdata=0;
     function sendId(){
@@ -110,10 +108,15 @@
                 alert("请求数据失败!");
             }
         });
-        }
-
+    }
     function insertOne() {
-
+        // var uid = $("#uid").val();
+        // var name = $("#name").val();
+        // var sex = $("#sex").val();
+        // var age = $("#age").val();
+        // var birthday=$("#birthday").val();
+        // var grade = $("#grade").val();
+        // var major = $("#major").val();
         var json_data={
             "uid" : $("#uid").val(),
             "name" : $("#name").val(),
@@ -161,6 +164,24 @@
             }
         });
     }
+    function select_findCategory(){
+        $.ajax({
+            async:false,
+            type:"get",
+            url:"http://localhost:8080/Mmaterials/select_findCategory?cid=2&uid=2",
+            contentType: "application/x-www-form-urlencoded",
+            dataType: "json",
+            data: {},
+            success:function(result){
+                console.log(result);
+            },
+            error: function (errorMsg) {
+                //请求失败时执行该函数
+                alert("请求数据失败!");
+            }
+        });
+    }
+
     function TBfindAll(){
         $.ajax({
             async:false,
@@ -196,7 +217,13 @@
         });
     }
     function TBMinsertOne() {
-
+        // var uid = $("#uid").val();
+        // var name = $("#name").val();
+        // var sex = $("#sex").val();
+        // var age = $("#age").val();
+        // var birthday=$("#birthday").val();
+        // var grade = $("#grade").val();
+        // var major = $("#major").val();
         var json_data={
             "Iid" : $("#IID").val(),
             "Iname" : $("#Iname").val(),
@@ -204,8 +231,6 @@
             "Inote":$("#Inote").val(),
             "Istate":$("#Istate").val(),
         };
-
-
         $.ajax({
             async:false,
             type:"post",
@@ -224,14 +249,17 @@
         });
     }
     function TBMdeleteOne(){
+        var json_data={
+            "uid" : $("#delete_uid").val(),
+            "iid" : $("#delete_iid").val(),
+        };
         $.ajax({
             async:false,
-            type:"get",
-            url:"http://localhost:8080/Mmaterials/TBMdeleteOne?iid=12&uid=2",
+            type:"post",
+            url:"http://localhost:8080/Mmaterials/TBMdeleteOne",
             contentType: "application/json;charset=utf-8",
             dataType: "json",
-            data:{
-            },
+            data:JSON.stringify(json_data),
             success: function (result){
                 alert("删除成功了");
                 console.log(result.name);
@@ -240,24 +268,6 @@
             error:function (errorMsg) {
 
                 alert(udmajor);
-            }
-        });
-    }
-
-    function TBBorrowOne(){
-        $.ajax({
-            async:false,
-            type:"get",
-            url:"http://localhost:8080/Tb_mcheckout/borrow?iid=2&uid=2",
-            contentType: "application/json;charset=utf-8",
-            dataType: "json",
-            data:{
-            },
-            success: function (result){
-                console.log(result);
-            },
-            error:function (errorMsg) {
-                alert("失败");
             }
         });
     }

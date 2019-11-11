@@ -8,6 +8,7 @@ package com.wolf.material.pojo;
 import com.alibaba.fastjson.JSONObject;
 import lombok.Data;
 import java.sql.Date;
+
 @Data//自动实现get，set，toString等方法，减少代码
 public class SoftwareInfo {
     private Integer sw_id;  //ID

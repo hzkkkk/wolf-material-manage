@@ -3,14 +3,13 @@ package com.wolf.material.service.Impl;
 import com.wolf.material.mapper.Tb_mcheckoutMapper;
 import com.wolf.material.pojo.Tb_mcheckout;
 import com.wolf.material.service.Tb_mcheckoutService;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 /**
- * @description:借还表
+ * @description:
  * @author: 江毅东
  * @createDate: 2019/10/29
  * @version: 1.0

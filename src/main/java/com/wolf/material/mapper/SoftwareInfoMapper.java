@@ -6,14 +6,11 @@
  **/
 package com.wolf.material.mapper;
 import com.wolf.material.pojo.SoftwareInfo;
-import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.*;
-import org.springframework.web.bind.annotation.RequestParam;
 
-import java.sql.Date;
 import java.util.List;
+
 @Mapper//指定该接口为Mapper，注入spring容器
 public interface SoftwareInfoMapper {
 

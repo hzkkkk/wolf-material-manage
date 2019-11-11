@@ -5,15 +5,13 @@
  * @date 2019/9/23
  **/
 package com.wolf.material.controller;
-import com.alibaba.fastjson.JSONObject;
-import com.sun.javafx.collections.MappingChange;
 import com.wolf.material.pojo.SoftwareInfo;
 import com.wolf.material.service.SoftwareInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import java.util.*;
-import java.sql.Date;
+
 import java.util.List;
+
 @RestController//返回数据直接显示，而不是跳转
 @CrossOrigin(origins = "*",maxAge = 3600)//实现跨域注解
 @RequestMapping("/software")//拦截有software的url

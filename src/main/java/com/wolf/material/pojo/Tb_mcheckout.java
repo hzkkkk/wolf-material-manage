@@ -3,11 +3,10 @@ package com.wolf.material.pojo;
 import com.alibaba.fastjson.JSONObject;
 import lombok.Data;
 
-
-import java.util.Date;
+import java.sql.Date;
 
 /**
- * @description: 借还表
+ * @description:
  * @author: 江毅东
  * @createDate: 2019/10/29
  * @version: 1.0
@@ -27,6 +26,4 @@ public class Tb_mcheckout {
         this.setOstate(object.getString("Ostate"));
         this.setOtime(object.getSqlDate("Otime"));
     }
-
-
 }

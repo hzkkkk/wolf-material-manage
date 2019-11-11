@@ -15,5 +15,5 @@ import java.util.List;
 @Mapper
 public interface UUserMapper {
     @Select("select * from uuser where UID = #{UID}")//#{id}为动态
-    List<UUser> UUserFindOne (Integer id) throws Exception;
+    List<UUser> UUserFindOne(Integer id) throws Exception;
 }

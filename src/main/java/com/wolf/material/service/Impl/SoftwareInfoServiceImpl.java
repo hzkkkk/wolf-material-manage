@@ -11,9 +11,8 @@ import com.wolf.material.service.SoftwareInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.sql.Date;
 import java.util.List;
-import javax.xml.crypto.Data;
+
 @Service
 public class SoftwareInfoServiceImpl implements SoftwareInfoService {
     @Autowired(required = false) //承认mapper用非bean配置，否则报错

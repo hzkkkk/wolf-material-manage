@@ -6,8 +6,8 @@
  **/
 package com.wolf.material.controller;
 import com.alibaba.fastjson.JSONObject;
-import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
+
 @RestController //实现跨域注解
 @CrossOrigin(origins = "*",maxAge = 3600)
 @RequestMapping("/api")

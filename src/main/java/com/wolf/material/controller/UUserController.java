@@ -5,10 +5,8 @@ import com.wolf.material.service.UUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 /**
- * @description:用户控制层
+ * @description:
  * @author: 江毅东
  * @createDate: 2019/10/31
  * @version: 1.0
