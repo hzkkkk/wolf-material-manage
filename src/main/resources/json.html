@@ -33,6 +33,8 @@
 <input type="button" value="删除物资" onclick="TBMdeleteOne()"/>
 
 <input type="button" value="发送物资种类id" onclick="select_findCategory()"/>
+
+<input type="button" value="发送一个物资id" onclick="select_findOneMaterial()"/>
 <script>
     var getdata=0;
     function sendId(){
@@ -146,6 +148,23 @@
         });
     }
 
+    function select_findOneMaterial(){
+        $.ajax({
+            async:false,
+            type:"get",
+            url:"http://localhost:8080/Mmaterials/findOne?iid=2&uid=2",
+            contentType: "application/x-www-form-urlencoded",
+            dataType: "json",
+            data: {},
+            success:function(result){
+                console.log(result);
+            },
+            error: function (errorMsg) {
+                //请求失败时执行该函数
+                alert("请求数据失败!");
+            }
+        });
+    }
 
     function TBfindOne(){
         $.ajax({

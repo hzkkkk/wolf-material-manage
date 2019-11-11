@@ -4,7 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import lombok.Data;
 
 /**
- * @description:
+ * @description: 物资表
  * @author: 江毅东
  * @createDate: 2019/10/31
  * @version: 1.0

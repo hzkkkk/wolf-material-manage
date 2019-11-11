@@ -2,13 +2,10 @@ package com.wolf.material.controller;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.wolf.material.pojo.Mcategory;
-import com.wolf.material.pojo.Mrevisions;
-import com.wolf.material.pojo.Tb_materials;
-import com.wolf.material.pojo.UUser;
+import com.wolf.material.pojo.*;
 import com.wolf.material.service.McategoryService;
 import com.wolf.material.service.MrevisionsService;
-import com.wolf.material.service.Tb_materiaslsService;
+import com.wolf.material.service.Tb_materialsService;
 import com.wolf.material.service.UUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -28,7 +25,7 @@ import java.util.Map;
 @RequestMapping("/Mmaterials")//拦截有software的url
 public class Tb_materialsController {
     @Autowired
-    private Tb_materiaslsService tb_materiaslsService;
+    private Tb_materialsService tb_materialsService;
 
     @Autowired
     private McategoryService mcategoryService;
@@ -38,13 +35,19 @@ public class Tb_materialsController {
 
     @Autowired
     private UUserService uUserService;
+
+
+    /**
+     * @description: 修改物资-(增加)
+     * @author cola
+     */
     @RequestMapping(value="TBMinsertOne", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
-//拦截有jsonInteractive的url,拦截该访问路径的json数据
+    //拦截有jsonInteractive的url,拦截该访问路径的json数据
     public String insertOne(@RequestBody Map<String, Object> data) throws Exception{//拦截一个key为id的json数据，并注入定义的变量
         Tb_materials tb_material = new Tb_materials();
         JSONObject jsonObject=new JSONObject(data);
         tb_material.Transfer(jsonObject);
-        boolean result=tb_materiaslsService.insertOne(tb_material);
+        boolean result=tb_materialsService.insertOne(tb_material);
         if(result) {
             jsonObject.put("id", 200);//成功返回
         } else{
@@ -53,22 +56,28 @@ public class Tb_materialsController {
         System.out.println(tb_material.toString());
         return jsonObject.toJSONString(); //返回json数据
     }
+
+
+    /**
+     * @description: 修改物资-(删除)
+     * @author cola
+     */
     @RequestMapping(value="TBMdeleteOne", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
     public String deleteOne(@RequestBody Map<String,Object>data) throws Exception
     {
-
         Mrevisions mrevisions=new Mrevisions();
         JSONObject jsonObject=new JSONObject(data);
         int uid=jsonObject.getInteger("uid");
         int Iid=jsonObject.getInteger("iid");
         System.out.println(uid+"   "+Iid);
         List<UUser> uUser = uUserService.findOne(uid);
+
         if(uUser.get(0).getUpermission().equals("user")){
             jsonObject.put("id", 400);//强制给数据
         }else {
-            boolean result = tb_materiaslsService.deleteOne(Iid);
-
+            boolean result = tb_materialsService.deleteOne(Iid);
             if (result) {
+                //191111 cola在物资修改表那边加一条记录
                 mrevisions.setIID(Iid);
                 mrevisions.setUID(uid);
                 mrevisions.setMstate("asdjasjdlasj");//强制给数据
@@ -85,12 +94,18 @@ public class Tb_materialsController {
         }
      return jsonObject.toJSONString();
     }
-    @RequestMapping(value="select_findCategory", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
-    public String findOne(@RequestParam(value="cid") Integer cid,@RequestParam(value = "uid") Integer uid) throws Exception{//拦截一个key为id的json数据，并注入定义的变量
+
+
+    /**
+     * @description: 查询物资-(查询一个)
+     * @author cola
+     */
+        @RequestMapping(value="/select_findCategory", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
+    public String findOneCategory(@RequestParam(value="cid") Integer cid,@RequestParam(value = "uid") Integer uid) throws Exception{//拦截一个key为id的json数据，并注入定义的变量
         JSONObject jsonObject=new JSONObject();
         JSONArray jsonArray=new JSONArray();
         List<Mcategory>mcategoryList=mcategoryService.findAll();
-        List<Tb_materials>materialsList=tb_materiaslsService.findAll();
+        List<Tb_materials>materialsList=tb_materialsService.findAll();
         List<UUser> uUser = uUserService.findOne(uid);
         int flag=0;
         for(Mcategory mcategory:mcategoryList)//查询物资种类是否存在
@@ -121,5 +136,34 @@ public class Tb_materialsController {
 
         return jsonObject.toJSONString();//返回json数据
     }
+
+
+
+    //查询一个
+    @RequestMapping(value="/findOne", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
+    //拦截有jsonInteractive的url,拦截该访问路径的json数据
+    public String findOne(@RequestParam(value="iid") Integer iid,@RequestParam(value = "uid") Integer uid) throws Exception {//拦截一个key为id的json数据，并注入定义的变量
+        List<Tb_materials> tb_materials = tb_materialsService.findOne(iid);//调用service类方法
+        JSONObject jsonObject = new JSONObject();
+        if(tb_materials.isEmpty()){
+            jsonObject.put("id",500);
+        }
+        for(Tb_materials tb:tb_materials) {
+            if(tb.getIid()==iid) {
+                //System.out.println(tb.toString());
+                jsonObject.put("iid",iid);
+                jsonObject.put("Iname",tb.getIname());
+                jsonObject.put("CID",tb.getCid());
+                jsonObject.put("Inote",tb.getInote());
+                jsonObject.put("Istate",tb.getIstate());
+                System.out.println(jsonObject.toJSONString());
+
+            }
+
+        }
+
+        return jsonObject.toJSONString();//返回json数据
+    }
+
 
 }

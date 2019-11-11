@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 /**
- * @description:
+ * @description:借还表
  * @author: 江毅东
  * @createDate: 2019/10/29
  * @version: 1.0

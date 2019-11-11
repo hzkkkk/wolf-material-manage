@@ -16,11 +16,19 @@ import java.util.List;
 public interface Tb_materialsMapper {
     @Insert("insert into tb_materials(IID,Iname,CID,Inote,Istate) values(null,#{Iname},#{Cid},#{Inote},'available')")
     boolean insertOne(Tb_materials tb_materials) throws Exception;
+
     @Delete("DELETE FROM tb_materials WHERE IID=#{Iid}")
     boolean deleteOne(Integer Iid)throws Exception;
-    @Update("update tb_materials set Ostate= where uid=#{uid}")
-    void updateBorrow(Integer uid) throws Exception;
-    @Select("SELECT * FROM tb_materials")
-    List<Tb_materials>findAll()throws Exception;
 
+    @Update("update tb_materials set Istate='borrowed' where iid=#{iid}")
+    boolean updateBorrow(Integer uid) throws Exception;
+
+    @Update("update tb_materials set Istate='available' where iid=#{iid}")
+    boolean updateAvailable(Integer uid) throws Exception;
+
+    @Select("SELECT * FROM tb_materials")
+    List<Tb_materials> findAll()throws Exception;
+
+    @Select("select * from tb_materials where IID=#{Iid} ")
+    List<Tb_materials> findOne(Integer Iid)throws Exception;
 }
