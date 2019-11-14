@@ -90,6 +90,15 @@
             <artifactId>spring-web</artifactId>
             <version>5.1.9.RELEASE</version>
         </dependency>
+
+        <!--微信小程序要用http请求token-->
+        <!-- https://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient -->
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>4.5.10</version>
+        </dependency>
+
     </dependencies>
 
     <build>

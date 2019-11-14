@@ -23,7 +23,6 @@ import java.util.List;
 @CrossOrigin(origins = "*",maxAge = 3600)//实现跨域注解
 @RequestMapping("/Tb_mcheckout")//拦截有software的url
 public class Tb_mcheckoutController {
-
     @Autowired
     private Tb_mcheckoutService tb_mcheckoutService;
     @Autowired
