@@ -164,8 +164,8 @@ public class WechatUtils {
 //////////////////////////////////
         ResourceBundle resource = ResourceBundle.getBundle("wechat");
         //wechat为属性文件名，放在包resource下，如果是放在src下，直接用config即可
-        String iid ="1";
-        String page="page/23333";
+        String iid ="2";
+        String page="pages/DetailsWZ/DetailsWZ";
 
         APP_ID = resource.getString("appid");
         APP_SECRET = resource.getString("appsecret");
@@ -196,10 +196,8 @@ public class WechatUtils {
         response = httpClient.execute(httpPost);
         //请求参数,实现post
         InputStream inputStream = response.getEntity().getContent();
-        String name = iid + ".jpg";
+        String name = iid + ".png";
         saveToImgByInputStream(inputStream,"E:\\",name);  //保存图片
-
-
 //        savebase64ToImage();
     }
 

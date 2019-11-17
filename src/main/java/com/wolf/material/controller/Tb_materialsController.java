@@ -157,11 +157,8 @@ public class Tb_materialsController {
                 jsonObject.put("Inote",tb.getInote());
                 jsonObject.put("Istate",tb.getIstate());
                 System.out.println(jsonObject.toJSONString());
-
             }
-
         }
-
         return jsonObject.toJSONString();//返回json数据
     }
 

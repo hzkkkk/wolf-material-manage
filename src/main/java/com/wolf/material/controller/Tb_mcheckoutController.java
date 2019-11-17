@@ -95,6 +95,7 @@ public class Tb_mcheckoutController {
 
 
     //查询一个
+    //页面访问localhost:8080/Tb_mcheckout/findOne
     @RequestMapping(value="/findOne", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
     //拦截有jsonInteractive的url,拦截该访问路径的json数据
     public String findOne(@RequestParam(value="iid") Integer iid,@RequestParam(value = "uid") Integer uid) throws Exception {//拦截一个key为id的json数据，并注入定义的变量
@@ -115,7 +116,7 @@ public class Tb_mcheckoutController {
 
 
 
-    //页面访问localhost:8080/software/findOne,接收网页传来的json中id属性，到数据库查询id相同的人员信息并返回
+    //页面访问localhost:8080/Tb_mcheckout/TBfindAll,接收网页传来的json中id属性，到数据库查询id相同的人员信息并返回
     @RequestMapping(value="/TBfindAll", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
     //拦截有jsonInteractive的url,拦截该访问路径的json数据
     public String findAll() throws Exception{//拦截一个key为id的json数据，并注入定义的变量
