@@ -114,13 +114,13 @@ public class Tb_mcheckoutController {
         return jsonObject.toJSONString();//返回json数据
     }
 
-
-
     //页面访问localhost:8080/Tb_mcheckout/TBfindAll,接收网页传来的json中id属性，到数据库查询id相同的人员信息并返回
-    @RequestMapping(value="/TBfindAll", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
+    @RequestMapping(value="/findAll", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
     //拦截有jsonInteractive的url,拦截该访问路径的json数据
     public String findAll() throws Exception{//拦截一个key为id的json数据，并注入定义的变量
+
         List<Tb_mcheckout> tb_mcheckouts = tb_mcheckoutService.findAll();//调用service类方法
+
         JSONObject jsonObject = new JSONObject();
         JSONObject jsonObject1=new JSONObject();
         JSONArray jsonArray=new JSONArray();
@@ -136,7 +136,6 @@ public class Tb_mcheckoutController {
         } else {
             jsonObject.put("id", 400);
         }
-
 
         return jsonObject.toJSONString();//返回json数据
     }

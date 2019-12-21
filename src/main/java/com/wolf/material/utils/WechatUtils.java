@@ -28,9 +28,9 @@ import java.awt.image.BufferedImage;
 import java.io.*;
 import java.util.*;
 
-@RestController //实现跨域注解
-@CrossOrigin(origins = "*",maxAge = 3600)
-@RequestMapping("/wx")
+//@RestController //实现跨域注解
+//@CrossOrigin(origins = "*",maxAge = 3600)
+//@RequestMapping("/wx")
 public class WechatUtils {
 
     static BASE64Decoder decoder = new sun.misc.BASE64Decoder();
@@ -131,8 +131,6 @@ public class WechatUtils {
     }
 
 
-
-
     /*
      * 7内部调用函数 : (String)Buffer转jpg
      *
@@ -154,7 +152,6 @@ public class WechatUtils {
 //    版权声明：本文为博主原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接和本声明。
 //    本文链接：https://blog.csdn.net/m0_37739193/article/details/78619987
 
-
     /*
      * 6内部调用函数 : 用access_token,page和scene
      * 下载一个二维码的二进制文本
@@ -174,11 +171,10 @@ public class WechatUtils {
 //////////////////////////////////
         String token = _token;   // 得到token
 
-
         Map<String, Object> params = new HashMap<>();
         params.put("scene", iid);  //参数
         params.put("page", page); //位置
-        params.put("width", 430);
+        params.put("width", 125);
 //////////////////////////////////
         CloseableHttpClient  httpClient = HttpClientBuilder.create().build();
         CloseableHttpResponse response = null;

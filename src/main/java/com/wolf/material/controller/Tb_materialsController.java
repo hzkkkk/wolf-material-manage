@@ -41,7 +41,7 @@ public class Tb_materialsController {
      * @description: 修改物资-(增加)
      * @author cola
      */
-    @RequestMapping(value="TBMinsertOne", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+    @RequestMapping(value="insertOne", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
     //拦截有jsonInteractive的url,拦截该访问路径的json数据
     public String insertOne(@RequestBody Map<String, Object> data) throws Exception{//拦截一个key为id的json数据，并注入定义的变量
         Tb_materials tb_material = new Tb_materials();
@@ -62,7 +62,7 @@ public class Tb_materialsController {
      * @description: 修改物资-(删除)
      * @author cola
      */
-    @RequestMapping(value="TBMdeleteOne", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+    @RequestMapping(value="deleteOne", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
     public String deleteOne(@RequestBody Map<String,Object>data) throws Exception
     {
         Mrevisions mrevisions=new Mrevisions();
@@ -97,10 +97,10 @@ public class Tb_materialsController {
 
 
     /**
-     * @description: 查询物资-(查询一个)
+     * @description: 查询物资种类-(查询一个)
      * @author cola
      */
-        @RequestMapping(value="/select_findCategory", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
+        @RequestMapping(value="/findOneCategory", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
     public String findOneCategory(@RequestParam(value="cid") Integer cid,@RequestParam(value = "uid") Integer uid) throws Exception{//拦截一个key为id的json数据，并注入定义的变量
         JSONObject jsonObject=new JSONObject();
         JSONArray jsonArray=new JSONArray();
@@ -162,5 +162,29 @@ public class Tb_materialsController {
         return jsonObject.toJSONString();//返回json数据
     }
 
+    //页面访问localhost:8080/Tb_mcheckout/TBfindAll,接收网页传来的json中id属性，到数据库查询id相同的人员信息并返回
+    @RequestMapping(value="/findAll", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
+    //拦截有jsonInteractive的url,拦截该访问路径的json数据
+    public String findAll() throws Exception {//拦截一个key为id的json数据，并注入定义的变量
+        List<Tb_materials> tb_materials = tb_materialsService.findAll();//调用service类方法
+        JSONObject jsonObject = new JSONObject();
+        JSONObject jsonObject1 = new JSONObject();
+        JSONArray jsonArray = new JSONArray();
+        System.out.println(tb_materials.toString());
+
+        if (tb_materials != null && !tb_materials.isEmpty()) {
+            for (Tb_materials tb_material : tb_materials) {
+                jsonArray.add(tb_material);
+
+            }
+            jsonObject.put("data", jsonArray);
+            //System.out.println(tb_mcheckouts.get(1).toString());
+        } else {
+            jsonObject.put("id", 400);
+        }
+
+        return jsonObject.toJSONString();//返回json数据
+
+    }
 
 }

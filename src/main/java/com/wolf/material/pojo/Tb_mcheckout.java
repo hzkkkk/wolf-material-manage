@@ -20,8 +20,7 @@ public class Tb_mcheckout {
     private  Date Otime;  //借还时间
 
     public void Transfer(JSONObject object){
-        this.setIID(object.getInteger("I" +
-                "ID"));
+        this.setIID(object.getInteger("I" + "ID"));
         this.setUID(object.getInteger("UID"));
         this.setOstate(object.getString("Ostate"));
         this.setOtime(object.getSqlDate("Otime"));

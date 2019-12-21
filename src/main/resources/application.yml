@@ -1,4 +1,12 @@
 spring:
+#  thymeleaf:
+#    cache: false
+#    prefix: /WEB-INF/jsp/
+#    suffix: .html .jsp
+  mvc:
+#    view:
+#      prefix: /webapp/WEB-INF/jsp/
+#      suffix: .jsp
   # 配置数据库信息
   datasource:
     druid:
@@ -33,7 +41,7 @@ spring:
       web-stat-filter:
         enabled: true
         url-pattern: /*
-        exclusions: "*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*"
+        exclusions: "*.jquery,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*"
         session-stat-enable: false
         session-stat-max-count: 1000
         principal-cookie-name: admin
